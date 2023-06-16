@@ -1,82 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<!-- Starts Head Section -->
-
-<head>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="icon" type="image/x-icon" href="/static/images/free-30-instagram-stories-icons23_122570.png">
-    <title>Petstagram</title>
-</head>
-
-<!-- Starts Body Section -->
-
-<body>
-
-    <!-- Starts Header Section with Navigation Bar -->
-    <header>
-        <nav class="navbar">
-            <div class="container">
-                <div class="logo">
-                    <!-- Link to Home Page -->
-                    <a href="#">
-                        <img width="50px" src="/static/images/free-30-instagram-stories-icons23_122570.png" alt="img1">
-                    </a>
-
-                    <!-- Link to Home Page -->
-                    <a class="home" href="#">
-                        <i>Petstagram</i>
-                    </a>
-                </div>
-
-                <div class="nav-links">
-                    <ul class="nav-group">
-                        <li class="nav-item">
-                            <!-- Link to Catalog Page -->
-                            <a href="#">
-                                <i>Catalog</i>
-                            </a>
-                        </li>
-
-                        <!--For Guest User-->
-                        <li class="nav-item">
-                            <!-- Link to Login Page -->
-                            <a href="#">
-                                <i>Login</i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <!-- Link to Register Page -->
-                            <a href="#">
-                                <i>Register</i>
-                            </a>
-                        </li>
-
-                        <!--For login users-->
-                        <li class="nav-item">
-                            <!-- Link to Add Photo Page -->
-                            <a href="#">
-                                <i>Add Photo</i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <!-- Link to Profile Page -->
-                            <a href="#">
-                                <i>Profile</i>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <!-- Link to Logout Page -->
-                            <a href="#">
-                                <i>Logout</i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
 
     <!-- Starts Main Section -->
     <main>
@@ -84,39 +5,28 @@
         <div class="editPage">
             <h2>Edit photo</h2>
             <!-- Start Add Photo Form -->
-            <form action="">
+            <form method="POST">
                 <p>
-                    <input type="text" name="" placeholder="Name" value="Sal">
+                    <input type="text" name="name" placeholder="Name" value="{{photo.name}}">
                 </p>
 
                 <p>
-                    <input type="number" name="" placeholder="Age" value="4">
+                    <input type="number" name="age" placeholder="Age" value="{{photo.age}}">
                 </p>
 
                 <p>
-                    <textarea type="text" name="" placeholder="Description">This is my pet!</textarea>
+                    <textarea type="text" name="desc" placeholder="Description">{{photo.desc}}</textarea>
                 </p>
 
                 <p>
-                    <input type="text" name="" placeholder="Location" value="Bansko, Bulgaria">
+                    <input type="text" name="location" placeholder="Location" value="{{photo.location}}">
                 </p>
 
                 <p>
-                    <input type="text" name="" placeholder="Link to image" value="/static/images/axolotl.jpeg">
+                    <input type="text" name="imageUrl" placeholder="Link to image" value="{{photo.imageUrl}}">
                 </p>
                 <!-- Add Photo Button -->
                 <button class="edit-btn" type="submit">Edit Photo</button>
             </form>
         </div>
     </main>
-
-    <!-- Start Footer Section -->
-    <div class="footer">
-        <span class="footer-section">
-            © 2023 SoftUni Back-End Exam
-        </span>
-    </div>
-
-</body>
-
-</html>

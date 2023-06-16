@@ -69,6 +69,53 @@ router.post('/:id/details', async (req, res) => {
 
 });
 
+router.get('/:id/edit', async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        const photo = await Photo.findById(id).lean();
+        res.render('edit', {photo});
+    } catch (err) {
+        return res.render('edit', {error: err});
+    }
+});
+
+router.post('/:id/edit', async (req, res) => {
+    const id = req.params.id;
+    const {name, age, desc, location, imageUrl} = req.body;
+    const user = req.user._id;
+    const photo = await Photo.findById(id).lean();
+    photoOwner = photo.owner._id.toString();
+    if(user != photoOwner) {
+        return res.render('404');
+    }
+
+    try {
+        await Photo.findByIdAndUpdate(id, {name, age, desc, location, imageUrl});
+    } catch (err) {
+        return res.render('edit', {error: err});
+    }
+
+    res.redirect(`/photo/${id}/details`);
+});
+
+router.get('/:id/delete', async (req, res) => {
+    const id = req.params.id;
+    const user = req.user._id;
+    const photo = await Photo.findById(id).lean();
+    photoOwner = photo.owner._id.toString();
+    if(user != photoOwner) {
+        return res.render('404');
+    }
+
+    try {
+        await Photo.findByIdAndDelete(id);
+    } catch (err) {
+        return res.render('details', {error: err});
+    }
+
+    res.redirect('/photo/catalog');
+});
 
 
 module.exports = router;
