@@ -16,7 +16,7 @@ router.post('/create', async (req, res) => {
         return res.render('create', {error: err});
     }
 
-    res.redirect('/');
+    res.redirect('/photo/catalog');
 
 });
 
