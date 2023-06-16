@@ -22,21 +22,21 @@ exports.register = async (username, email, password, repeatPassword) => {
     await User.create({username, email, password});
 };
 
-exports.login = async (email, password) => {
+exports.login = async (username, password) => {
 
-    const user = await User.findOne({email});
+    const user = await User.findOne({username});
     
     if(!user){
-        throw new Error('Wrong email or password!');
+        throw new Error('Wrong username or password!');
     }
 
     const isMatch = await user.validatePassword(password);
 
     if(!isMatch){
-        throw new Error('Wrong email or password!');
+        throw new Error('Wrong username or password!');
     }
 
-    const payload = {_id: user._id, email, username: user.username};
+    const payload = {_id: user._id, username: user.username};
     const token = await jwt.sign(payload, SECRET);
     
     return token;
