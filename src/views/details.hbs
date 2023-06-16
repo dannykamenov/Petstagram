@@ -77,7 +77,8 @@
           </div>
 
             <div class="comments">
-            <div class="comments-top">
+                <div class="comments-top">
+                {{#each photo.commentList}}
               <div class="userDetails">
                 <div class="comment-data">
                   <div class="profilepic">
@@ -90,9 +91,10 @@
                   </div>
 
                   <!--User's username-->
-                  <p><b>StevIvanov</b>- OMG where can i get one</p>
+                  <p><b>{{user.username}}</b>- {{comment}}</p>
                 </div>
               </div>
+                {{/each}}
           </div>
         </div>
         {{#if isAuthenticated}}

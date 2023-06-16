@@ -36,7 +36,7 @@ router.get('/:id/details', async (req, res) => {
 
     try {
         let isOwner = false;
-        const photo = await Photo.findById(id).populate('owner').lean();
+        const photo = await Photo.findById(id).populate('owner').populate('commentList.user').lean();
         if(!req.user) {
             return res.render('details', {photo, isOwner});
         }
@@ -51,7 +51,7 @@ router.get('/:id/details', async (req, res) => {
 router.post('/:id/details', async (req, res) => {
     const id = req.params.id;
     const {comment} = req.body;
-    const userId = req.user._id;
+    const user = req.user._id;
     const photo = await Photo.findById(id);
 
     if(!photo) {
@@ -63,7 +63,7 @@ router.post('/:id/details', async (req, res) => {
         return res.render('details', {error: 'Comment cannot be empty!'});
     }
 
-    photo.commentList.push({userId, comment});
+    photo.commentList.push({user, comment});
     await photo.save();
     res.redirect(`/photo/${id}/details`);
 

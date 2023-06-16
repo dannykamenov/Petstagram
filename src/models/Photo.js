@@ -36,8 +36,14 @@ const photoSchema = new mongoose.Schema({
     },
     commentList: [
         {
-            userId: mongoose.Types.ObjectId,
-            comment: String,
+            user: {
+                type: mongoose.Types.ObjectId,
+                ref: 'User'
+            },
+            comment: {
+                type: String,
+                required: [true, 'Comment is required!'],
+            },
         }
     ],
     owner: {
